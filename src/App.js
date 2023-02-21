@@ -10,8 +10,6 @@ function App() {
 	
 	return (
 		<div className="App">
-			привет!
-			<br />
 			<button onClick={onToggleButton}>toggle</button>
 		</div>
 	)
