@@ -13,6 +13,7 @@ function App() {
 			привет!
 			<br />
 			<button className="body" onClick={onClose}> Push me! </button>
+			<button className="body" onClick={onClose}> Push me again! </button>
 		</div>
 	)
 }
