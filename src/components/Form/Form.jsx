@@ -8,19 +8,10 @@ const Form = () => {
 	const [subject, setSubject] = useState('physical')
 	const { tg } = useTelegram()
 
-	const onSentData = useCallback(() => {
-		const data = {
-			country,
-			city,
-			subject,
-		}
-		tg.sendData(JSON.stringify(data))
-	}, [])
-
 	useEffect(() => {
-		tg.WebApp.onEvent('MainButtonClicked', onSentData)
+		// tg.Web_App.onEvent('MainButtonClicked', onSentData)
 		return () => {
-			tg.WebApp.offEvent('MainButtonClicked', onSentData)
+			// tg.WebApp.offEvent('MainButtonClicked', onSentData)
 		}
 	}, [])
 
@@ -29,12 +20,9 @@ const Form = () => {
 			text: 'Отправить данные',
 		})
 	}, [])
+
 	useEffect(() => {
-		if (!country || !city) {
-			tg.MainButton.hide()
-		} else {
-			tg.MainButton.show()
-		}
+		!country || !city ? tg.MainButton.hide() : tg.MainButton.show()
 	}, [country, city])
 
 	const onChangeCountry = (e) => setCountry(e.target.value)
