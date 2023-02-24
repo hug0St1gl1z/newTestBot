@@ -10,19 +10,19 @@ const Form = () => {
 	const { tg } = useTelegram()
 
 	function onSendData() {
-		const data = {
+		return useCallback(() => {const data = {
 	        country,
 	        city,
 	        subject
 	    }
-	    tg.sendData(JSON.stringify(data))}
+	    tg.sendData(JSON.stringify(data))}, [])
 	    
 	}
 
 	useEffect(() => {
 		tg.onEvent("mainButtonClicked", onSendData())
 		return () => {
-			tg.offEvent("mainButtonClicked", onSendData())
+			Telegram.WebApp.offEvent("mainButtonClicked", onSendData())
 		}
 	}, [])
 
