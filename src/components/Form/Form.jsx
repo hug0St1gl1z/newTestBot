@@ -10,12 +10,12 @@ const Form = () => {
 	const { tg } = useTelegram()
 
 	function onSendData() {
-		return useCallback(() => {const data = {
+		const data = {
 	        country,
 	        city,
 	        subject
 	    }
-	    tg.sendData(JSON.stringify(data))}, [])
+	    tg.sendData(JSON.stringify(data))}
 	    
 	}
 
