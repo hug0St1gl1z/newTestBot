@@ -20,9 +20,9 @@ const Form = () => {
 	}
 
 	useEffect(() => {
-		tg.onEvent("mainButtonClicked", onSendData)
+		tg.onEvent("mainButtonClicked", onSendData())
 		return () => {
-			Telegram.WebApp.offEvent("mainButtonClicked", onSendData)
+			tg.offEvent("mainButtonClicked", onSendData())
 		}
 	}, [])
 
