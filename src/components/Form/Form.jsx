@@ -18,12 +18,12 @@ const Form = () => {
         tg.sendData(JSON.stringify(data))
     }, [])
 
-	useEffect(() => {
-		tg.WebApp.onEvent('MainButtonClicked', onSentData)
-		return () => {
-			tg.WebApp.offEvent('MainButtonClicked', onSentData)
-		}
-	}, [])
+	// useEffect(() => {
+	// 	tg.WebApp.onEvent('MainButtonClicked', onSentData)
+	// 	return () => {
+	// 		tg.WebApp.offEvent('MainButtonClicked', onSentData)
+	// 	}
+	// }, [])
 
 	useEffect(() => {
 		tg.MainButton.setParams({
@@ -68,4 +68,3 @@ const Form = () => {
 }
 
 export default Form
-
