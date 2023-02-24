@@ -9,21 +9,21 @@ const Form = () => {
 	const [subject, setSubject] = useState('physical')
 	const { tg } = useTelegram()
 
-	// const onSentData = useCallback(() => {
-    //     const data = {
-    //         country,
-    //         city,
-    //         subject
-    //     }
-    //     tg.sendData(JSON.stringify(data))
-    // }, [])
+	const onSendData = useCallback(() => {
+	    const data = {
+	        country,
+	        city,
+	        subject
+	    }
+	    tg.sendData(JSON.stringify(data))
+	}, [])
 
-	// useEffect(() => {
-	// 	tg.WebApp.onEvent('MainButtonClicked', onSentData)
-	// 	return () => {
-	// 		tg.WebApp.offEvent('MainButtonClicked', onSentData)
-	// 	}
-	// }, [])
+	useEffect(() => {
+		tg.onEvent('mainButtonClicked', onSendData)
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData)
+		}
+	}, [])
 
 	useEffect(() => {
 		tg.MainButton.setParams({
@@ -31,11 +31,7 @@ const Form = () => {
 		})
 	}, [])
 	useEffect(() => {
-		if (!country || !city) {
-			tg.MainButton.hide()
-		} else {
-			tg.MainButton.show()
-		}
+		(!country || !city) ? tg.MainButton.hide() : tg.MainButton.show()
 	}, [country, city])
 
 	const onChangeCountry = (e) => setCountry(e.target.value)
