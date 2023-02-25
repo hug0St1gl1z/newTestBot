@@ -15,7 +15,7 @@ const Form = () => {
 			subject,
 		}
 		console.log(data)
-		Telegram.Web_App.sendData(JSON.stringify(data))
+		tg.sendData(JSON.stringify(data))
 	}, [country, city, subject])
 
 	useEffect(() => {
