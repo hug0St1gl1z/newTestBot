@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Form.css'
 import { useTelegram } from '../Hooks/useTelegram'
 
@@ -9,21 +8,22 @@ const Form = () => {
 	const [subject, setSubject] = useState('physical')
 	const { tg } = useTelegram()
 
-	const onSendData = () => { useCallback(() => {
-		const data = {
-	        country,
-	        city,
-	        subject
-	    }
-	    tg.sendData(JSON.stringify(data))}, [])
-	    
+	function onSendData() {
+		return useCallback(() => {
+			const data = {
+				country,
+				city,
+				subject,
+			}
+			tg.sendData(JSON.stringify(data))
+		}, [])
 	}
 
 	useEffect(() => {
-		tg.onEvent("mainButtonClicked", onSendData)
-		return (() => {
-			tg.offEvent("mainButtonClicked", onSendData)
-		})
+		tg.onEvent('mainButtonClicked', onSendData())
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData())
+		}
 	}, [])
 
 	useEffect(() => {
@@ -32,7 +32,7 @@ const Form = () => {
 		})
 	}, [])
 	useEffect(() => {
-		(!country || !city) ? tg.MainButton.hide() : tg.MainButton.show()
+		!country || !city ? tg.MainButton.hide() : tg.MainButton.show()
 	}, [country, city])
 
 	const onChangeCountry = (e) => setCountry(e.target.value)
