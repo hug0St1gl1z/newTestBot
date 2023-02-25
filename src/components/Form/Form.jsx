@@ -6,7 +6,7 @@ const Form = () => {
 	const [country, setCountry] = useState('')
 	const [city, setCity] = useState('')
 	const [subject, setSubject] = useState('physical')
-	const { tg } = useTelegram()
+	const { tg, mainButtonClicked } = useTelegram()
 
 	const onSendData = useCallback(() => {
 		const data = {
@@ -19,9 +19,9 @@ const Form = () => {
 	}, [country, city, subject])
 
 	useEffect(() => {
-		tg.onEvent('mainButtonClicked', onSendData)
+		tg.onEvent(mainButtonClicked, onSendData)
 		return () => {
-			tg.offEvent('mainButtonClicked', onSendData)
+			tg.offEvent(mainButtonClicked, onSendData)
 		}
 	}, [onSendData])
 
