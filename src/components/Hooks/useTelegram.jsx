@@ -10,5 +10,6 @@ export function useTelegram() {
 		onClose,
 		tg,
 		user: tg.initDataUnsafe?.user?.username,
+		queriId: tg.initDataUnsafe?.queri_Id
 	}
 }
